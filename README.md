@@ -1,23 +1,13 @@
-# RawInput Touchpad
-
-Sample to capture inputs from Precision Touchpad by [Raw Input](https://docs.microsoft.com/en-us/windows/win32/inputdev/raw-input) API. This is C# implementation which basically follows C++ function of [TouchpadGestures Advanced][1] by @kamektx to parse inputs from Touchpad including each contact point. Also, [RawInput.Sharp][2] by @mfakane is well sophisticated C# implementation and great help to understand this API. Many thanks!
-
-- [kamektx/TouchpadGestures_Advanced][1]
-- [mfakane/rawinput-sharp][2]
+# RawInput.Touchpad
+\[[Checkout the original README](/README_old.md)\]  
+This intends to read input on a Precision Touchpad(PTP) and map it to the whole screen. This is modified from [emoacht/RawInput.Touchpad](https://github.com/emoacht/RawInput.Touchpad). Unlike [AbsoluteTouchEx](https://github.com/apsun/AbsoluteTouchEx), this won't inject into process. 
 
 ## Requirements
+* .NET 7
 
-- .NET 5.0
-
-## Example
-
-When five fingers are touching the touchpad of Surface Pro 4 Type Cover, five contacts appear with each coordinates.
-
-![Screenshot](Images/Screenshot.png)
-
-## License
-
-- MIT License
-
-[1]: https://github.com/kamektx/TouchpadGestures_Advanced
-[2]: https://github.com/mfakane/rawinput-sharp
+## Roadmap
+- [x] Handle touchpad event ( done in the oringinal repo by [@emoacht](
+- [ ] Handle touchpad event in background
+- [x] Set mouse position
+- [ ] Establish the  correct mapping between the screen and touchpad
+- [ ] Run in background

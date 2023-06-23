@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -47,6 +49,8 @@ namespace RawInput.Touchpad
 			_targetSource = PresentationSource.FromVisual(this) as HwndSource;
 			_targetSource?.AddHook(WndProc);
 
+			mouseProcessor = new MouseEventProcessor();
+
 			TouchpadExists = TouchpadHelper.Exists();
 
 			_log.Add($"Precision touchpad exists: {TouchpadExists}");
@@ -64,11 +68,18 @@ namespace RawInput.Touchpad
 			switch (msg)
 			{
 				case TouchpadHelper.WM_INPUT:
-					var contacts = TouchpadHelper.ParseInput(lParam);
-					TouchpadContacts = string.Join(Environment.NewLine, contacts.Select(x => x.ToString()));
+					foreach(TouchpadContact x in TouchpadHelper.ParseInput(lParam))
+					{
+						if (x.ContactId == 0)
+						{
+							mouseProcessor.MoveCursor(x.X, x.Y);
+							TouchpadContacts = string.Join(Environment.NewLine, x.ToString());
 
-					_log.Add("---");
-					_log.Add(TouchpadContacts);
+							_log.Add("---");
+							_log.Add(TouchpadContacts);
+						}
+                    }
+
 					break;
 			}
 			return IntPtr.Zero;
@@ -78,5 +89,13 @@ namespace RawInput.Touchpad
 		{
 			Clipboard.SetText(string.Join(Environment.NewLine, _log));
 		}
-	}
+
+		MouseEventProcessor mouseProcessor;
+
+        private void Start_Click(object sender, RoutedEventArgs e)
+        {
+			mouseProcessor.MoveCursor(0, 0);
+			return;
+        }
+    }
 }

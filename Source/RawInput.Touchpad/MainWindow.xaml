@@ -24,8 +24,11 @@
 				Click="Copy_Click"/>
 		
 		<TextBlock Grid.Row="1"
-				   Margin="10"
+				   Margin="10,10,10,173"
 				   TextWrapping="Wrap"
 				   Text="{Binding ElementName=WindowRoot, Path=TouchpadContacts}"/>
-	</Grid>
+        <Grid Margin="10,54,10,10" Grid.Row="1">
+            <Button x:Name="Start" Content="Start mapping" Margin="10,120,10,10" Click="Start_Click" IsEnabled="{Binding ElementName=WindowRoot, Path=TouchpadExists}"/>
+        </Grid>
+    </Grid>
 </Window>
