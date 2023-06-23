@@ -12,10 +12,22 @@ namespace RawInput.Touchpad
     {
         [DllImport("user32.dll")]
         private static extern int SetCursorPos(int x, int y);
+        private bool enabled;
         public void MoveCursor(int x, int y)
         {
-            SetCursorPos(x, y);
-            return;
+            if (enabled)
+            {
+                SetCursorPos(x, y);
+                return;
+            }
+        }
+        public void ToggleEnabled()
+        {
+            this.enabled = !enabled;
+        }
+        public MouseEventProcessor()
+        {
+            this.enabled = false;
         }
     }
 
