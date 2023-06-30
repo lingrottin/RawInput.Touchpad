@@ -11,10 +11,7 @@ This intends to read input on a Precision Touchpad(PTP) and map it to the whole 
 Head to [Releases](https://github.com/lingrottin/RawInput.Touchpad/releases). You may need [.NET 7 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/7.0) installed.
 
 ### Will this trigger anti-cheating systems (such as osu!'s) ?
-This program sets cursor position globally, not injecting into any program, which may cause delay. But it will greatly reduce the probability of being anti-cheated.
-
-### It doesn't work in osu!
-Please disable `Raw Input`.
+This program sets cursor position globally, not injecting into any program, which may cause delay. But it will greatly reduce the probability of being anti-cheated. Also, this program uses the SendInput function to set cursor position, which is how OpenTabletDriver's absolute mapping mode works on Windows as well. To be frank, only when OpenTabletDriver is blocked in osu! can peppy block this.
 
 ### How to set the correct mapping?
 Mapping format is like
@@ -31,3 +28,7 @@ You will need to set `a,b` as the position of the upper-left corner of the touch
 - [x] Establish the correct mapping between the screen and touchpad
 - [ ] More easy-to-use
 - [ ] Run in background
+
+## Thanks to
+- [@emoacht](https://github.com/emoacht) for his original repo.
+- [OpenTabletDriver](https://github.com/OpenTabletDriver/OpenTabletDriver)

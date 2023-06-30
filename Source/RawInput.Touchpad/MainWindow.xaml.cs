@@ -112,15 +112,17 @@ namespace RawInput.Touchpad
 		// s=Start, e=End, g=Gap, tp=Touchpad, sc=Screen
         private void Start_Click(object sender, RoutedEventArgs e)
         {
-			string[] pos = this.MappingString.Text.Split('|');
+			string[] pos = MappingString.Text.Split('|');
+            var scy = ScreenManager.GetScreenHeight();
+            var scx = ScreenManager.GetScreenWidth();
             tpsx = int.Parse(pos[0].Split(',')[0]);
             tpsy = int.Parse(pos[0].Split(',')[1]);
             tpex = int.Parse(pos[1].Split(',')[0]);
             tpey = int.Parse(pos[1].Split(',')[1]);
-            scsx = int.Parse(pos[2].Split(',')[0]);
-            scsx = int.Parse(pos[2].Split(',')[1]);
-            scex = int.Parse(pos[3].Split(',')[0]);
-            scey = int.Parse(pos[3].Split(',')[1]);
+            scsx = (int)Math.Round(int.Parse(pos[2].Split(',')[0]) / scx * 65535);
+            scsy = (int)Math.Round(int.Parse(pos[2].Split(',')[1]) / scy * 65535);
+			scex = (int)Math.Round(int.Parse(pos[3].Split(',')[0]) / scx * 65535);
+            scey = (int)Math.Round(int.Parse(pos[3].Split(',')[1]) / scy * 65535);
 			tpgx = tpex - tpsx;
 			tpgy = tpey - tpsy;
 			scgx = scex - scsx;
